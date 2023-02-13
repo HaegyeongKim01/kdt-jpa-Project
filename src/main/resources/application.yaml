@@ -4,14 +4,14 @@ spring:
       enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/customer
+    url: jdbc:mysql://localhost:3306/kdt_order_jpa
     username: root
     password: 0917
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: create-drop
-    database: H2
+    database: mysql
     show-sql: true
     open-in-view: false
     properties:
