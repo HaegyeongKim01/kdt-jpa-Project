@@ -36,6 +36,9 @@ public class Member {
     @OneToMany(mappedBy = "member")   //연관관계 주인 // fk를 가지고 있는 객체의 field값 mappedBy에 설정
     private List<Order> orders = new ArrayList<>();
 
-
+    //연관관계 편의 메소드
+    public void addOrder(Order order) {
+        order.setMember(this);
+    }
 
 }

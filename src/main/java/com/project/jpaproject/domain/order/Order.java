@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Entity
@@ -41,5 +42,15 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
+
+    //연관관계 편의 메소드
+    public void setMember(Member member) {
+        //이미 존재한다면 remove
+        if (Objects.nonNull(this.member)) {
+            member.getOrders().remove(this);
+        }
+        this.member = member;
+        member.getOrders().add(this);
+    }
 
 }
