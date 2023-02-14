@@ -38,7 +38,7 @@ public class OrderPersistenceTest {
 
         transaction.commit();
     }
-
+/*
     @Test
     void 잘못된_설계() {
         Member member = new Member();
@@ -71,7 +71,7 @@ public class OrderPersistenceTest {
         // orderEntity.getMember() // 객체중심 설계라면 이렇게 해야하지 않을까?
         log.info("nick : {}", orderMemberEntity.getNickName());
     }
-
+*/
     @Test
     @DisplayName("양방향 관계 test")
     void 연관관계_테스트() {

@@ -7,11 +7,12 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "item")
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
