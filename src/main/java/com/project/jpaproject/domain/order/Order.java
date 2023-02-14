@@ -14,7 +14,7 @@ import java.util.Objects;
 @Table(name = "orders")
 @Getter
 @Setter
-public class Order {
+public class Order extends BaseEntity{
 
     @Id
     @Column(name = "id")

@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "member")
 @Getter
 @Setter
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
