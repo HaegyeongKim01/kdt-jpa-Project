@@ -1,5 +1,7 @@
 package com.project.jpaproject.domain.order;
 
+import com.project.jpaproject.domain.parent.Parent;
+import com.project.jpaproject.domain.parent.ParentId;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -61,6 +63,24 @@ public class ImproveMappingTest {
 
     }
 
+    @Test
+    @DisplayName("여러 식별자 테스트 ")
+    void id_test() {
+        EntityManager entityManager = emf.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
 
+        transaction.begin();
+        Parent parent = new Parent();
+        parent.setId1("id1");
+        parent.setId2("id2");
+
+        entityManager.persist(parent);
+        entityManager.clear();   //persistent context 영속성 clear
+        Parent parent1 = entityManager.find(Parent.class, new ParentId("id1", "id2"));
+        log.info("{} {}", parent1.getId1(), parent1.getId2());
+
+        transaction.commit();
+
+    }
 
 }
