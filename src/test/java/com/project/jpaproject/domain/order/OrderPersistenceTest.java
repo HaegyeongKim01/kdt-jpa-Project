@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +86,7 @@ public class OrderPersistenceTest {
         member.setName("홍길동");
         member.setDescription("hoxy... please push bell ");
         member.setAge(20);
-        member.setNickName("서울사람");
+        member.setNickName("서울사람인가");
 
         //persistence
         entityManager.persist(member);
@@ -98,8 +97,6 @@ public class OrderPersistenceTest {
         order.setMemo("if you want stay ");
         order.setOrderDatetime(LocalDateTime.now());
         order.setMember(member);
-        //order에 setMember를 해주었다면 member에도 setOrder를 해줘야 마지막 log를 찍었을 때 soize가 0이 나오는 오류 방지
-        member.setOrders(Lists.newArrayList(order));
 
         entityManager.persist(order);
         transaction.commit();
