@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Slf4j
 @SpringBootTest
 public class ImproveMappingTest {
@@ -33,6 +36,29 @@ public class ImproveMappingTest {
         entityManager.persist(food);
 
         transaction.commit();
+    }
+
+    @Test
+    @DisplayName("mapped_super_class Test")
+    void mapped_super_class_test(){
+        EntityManager entityManager = emf.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        transaction.begin();
+
+        Order order = new Order();
+        order.setUuid(UUID.randomUUID().toString());
+        order.setOrderStatus(OrderStatus.OPENED);
+        order.setMemo("---");
+        order.setOrderDatetime(LocalDateTime.now());
+
+        order.setCreatedBy("guppy.kang");
+        order.setCreatedAt(LocalDateTime.now());
+
+        entityManager.persist(order);
+
+        transaction.commit();
+
     }
 
 

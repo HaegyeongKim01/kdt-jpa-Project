@@ -10,8 +10,7 @@ spring:
   jpa:
     generate-ddl: true
     hibernate:
-      hbm2ddl:
-        auto: create-drop
+      ddl-auto: create-drop
     database: mysql
     show-sql: true
     open-in-view: false
