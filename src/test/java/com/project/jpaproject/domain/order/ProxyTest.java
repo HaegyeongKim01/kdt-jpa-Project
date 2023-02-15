@@ -45,7 +45,7 @@ public class ProxyTest {
         // 회원 엔티티
         Member member = new Member();
         member.setName("kanghonggu");
-        member.setNickName("guppy.HA");
+        member.setNickName("guppy.HAHA");
         member.setAge(33);
         member.setAddress("서울시 동작구");
         member.setDescription("KDT 화이팅");
@@ -89,6 +89,15 @@ public class ProxyTest {
         order.addOrderItems(orderItem); //order class에서 orderItems를 cascade하여 commit 하면 영속전이를 통해 영속으로 바뀌고 쿼리가 날라간다.
 
         transaction.commit();   //flush()   //영속성 정의 X ordrItem: 쿼리 날라가지 않음
+
+        entityManager.clear();
+
+        //////////Orphan Test start
+        Order order2 = entityManager.find(Order.class, uuid);
+
+        transaction.begin();
+        order2.getOrderItems().remove(0);   //고아상태 flush 순간 RDS 에서도 삭제하겠다.   //orphan 속성 추가해야함 (ORder.class에서)
+        transaction.commit();
     }
 
 
