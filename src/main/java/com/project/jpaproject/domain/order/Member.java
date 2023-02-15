@@ -33,7 +33,7 @@ public class Member extends BaseEntity {
     /**
      * 회원(Member)에서 Order 객체 가지고 오도록
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)   //연관관계 주인 // fk를 가지고 있는 객체의 field값 mappedBy에 설정
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)   //연관관계 주인 // fk를 가지고 있는 객체의 field값 mappedBy에 설정
     private List<Order> orders = new ArrayList<>();
 
     //연관관계 편의 메소드
