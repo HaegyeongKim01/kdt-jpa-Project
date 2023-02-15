@@ -35,7 +35,7 @@ public class Order extends BaseEntity{
      * 객체 참조 가능
      * 관계 - 회원 한명 당 여러 주문이 발생할 수 있으니 주문(N) - 회원(1)
      */
-    @ManyToOne(fetch = FetchType.LAZY)  //fetch를 지연로딩으로 설정 . 프록시를 실제 사용할 때 초기화하면서 데이터 베이스를 조회한다.
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)  //fetch를 지연로딩으로 설정 . 프록시를 실제 사용할 때 초기화하면서 데이터 베이스를 조회한다.
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
 
