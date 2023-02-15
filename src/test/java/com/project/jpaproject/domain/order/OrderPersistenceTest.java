@@ -27,7 +27,7 @@ public class OrderPersistenceTest {
         member.setName("kanghonggu");
         member.setAddress("서울시 동작구(만) 움직이면 쏜다.");
         member.setAge(33);
-        member.setNickName("guppy.d");
+        member.setNickName("guppy.ddd");
         member.setDescription("백앤드 개발자에요.");
 
         EntityManager entityManager = emf.createEntityManager();

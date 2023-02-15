@@ -39,7 +39,7 @@ public class Order extends BaseEntity{
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //영속성 전이 추가 +cascade
     private List<OrderItem> orderItems = new ArrayList<>();
 
     //연관관계 편의 메소드
