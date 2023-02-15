@@ -26,7 +26,7 @@ public abstract class Item extends BaseEntity{
 
     private int stockQuantity;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     /**

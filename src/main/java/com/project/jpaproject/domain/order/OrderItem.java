@@ -22,14 +22,14 @@ public class OrderItem extends BaseEntity {
     /**
      * Order과 연관관계 편의 메소드
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id" ,referencedColumnName = "id")
     private Order order;
 
     /**
      * item 과 order_item의 연관관계
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
 
@@ -50,5 +50,6 @@ public class OrderItem extends BaseEntity {
         this.item = item;
         item.getOrderItems().add(this);
     }
+
 
 }
