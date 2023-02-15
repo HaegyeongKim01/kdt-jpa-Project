@@ -1,16 +1,22 @@
 package com.project.jpaproject.order.service;
 
+import com.project.jpaproject.domain.order.OrderRepository;
 import com.project.jpaproject.domain.order.OrderStatus;
 import com.project.jpaproject.item.dto.ItemDto;
 import com.project.jpaproject.item.dto.ItemType;
 import com.project.jpaproject.member.dto.MemberDto;
 import com.project.jpaproject.order.dto.OrderDto;
 import com.project.jpaproject.order.dto.OrderItemDto;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,10 +31,12 @@ class OrderServiceTest {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    OrderRepository orderRepository;
+
     static String uuid = UUID.randomUUID().toString();
 
-    @Test
-    @DisplayName("order service test")
+    @BeforeEach
     void save_test() {
         // Given
         OrderDto orderDto = OrderDto.builder()
@@ -39,7 +47,7 @@ class OrderServiceTest {
                 .memberDto(
                         MemberDto.builder()
                                 .name("홍길동")
-                                .nickName("ggg.hong")
+                                .nickName("ggg.hhh")
                                 .address("인천시")
                                 .age(26)
                                 .description("no shake it ")
@@ -67,4 +75,33 @@ class OrderServiceTest {
         log.info("UUID:{}", uuid);
     }
 
+    @AfterEach
+    void tearDown() {
+        orderRepository.deleteAll();
+    }
+
+    @Test
+    @DisplayName("조회 test")
+    void findOneTest() throws NotFoundException {
+        // Given - 값이 주어졌을 때
+        String orderUuid = uuid;
+
+        // When - find 할 것 이고
+        OrderDto one = orderService.findOne(uuid);
+
+        // Then
+        assertThat(one.getUuid()).isEqualTo(orderUuid);
+    }
+
+    @Test
+    void findAllTest() {
+        // Given
+        PageRequest page = PageRequest.of(0, 10);
+
+        // When
+        Page<OrderDto> all = orderService.findAll(page);
+
+        // Then
+        assertThat(all.getTotalElements()).isEqualTo(1);
+    }
 }

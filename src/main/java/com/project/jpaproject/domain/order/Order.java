@@ -35,11 +35,11 @@ public class Order extends BaseEntity{
      * 객체 참조 가능
      * 관계 - 회원 한명 당 여러 주문이 발생할 수 있으니 주문(N) - 회원(1)
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)  //fetch를 지연로딩으로 설정 . 프록시를 실제 사용할 때 초기화하면서 데이터 베이스를 조회한다.
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)  //fetch를 지연로딩으로 설정 . 프록시를 실제 사용할 때 초기화하면서 데이터 베이스를 조회한다. //fetch(default:EAGER)
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true) //영속성 전이 추가 +cascade   //고아객체 true 같이 삭제
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true) //영속성 전이 추가 +cascade   //고아객체 true 같이 삭제  //fetch(deafault: LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     //연관관계 편의 메소드
