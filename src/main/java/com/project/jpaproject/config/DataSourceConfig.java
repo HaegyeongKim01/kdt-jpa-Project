@@ -13,7 +13,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.sql.DriverManager;
 import java.util.Properties;
 
 @Configuration
@@ -21,15 +20,16 @@ import java.util.Properties;
 
 public class DataSourceConfig {
 
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("org.h2.Driver");
-//        dataSource.setUrl("jdbc:h2:~/test");
-//        dataSource.setUsername("sa");
-//        dataSource.setPassword("");
-//        return dataSource;
-//    }
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/kdt_order_jpa");
+        dataSource.setUsername("root");
+        dataSource.setPassword("0917");
+
+        return dataSource;
+    }
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapter(JpaProperties jpaProperties) {
