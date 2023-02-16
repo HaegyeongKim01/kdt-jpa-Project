@@ -14,3 +14,9 @@ spring:
       hibernate:
         #format_sql: true         #SQL 줄바꿈 포함하여 여러 줄로 Hibernate 나온다.
         query.in_clause_parameter_padding: true
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
